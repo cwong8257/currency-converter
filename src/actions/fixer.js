@@ -6,8 +6,8 @@ export const getSymbols = () => {
   });
 };
 
-export const getRates = () => {
-  return fetch(`http://data.fixer.io/api/latest?access_key=${key}`).then(response => {
+export const getRates = date => {
+  return fetch(`http://data.fixer.io/api/${date}?access_key=${key}`).then(response => {
     return response.json();
   });
 };

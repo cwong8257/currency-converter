@@ -1,15 +1,10 @@
 import React from 'react';
+import Select from 'react-select';
 
 const SymbolPicker = ({ symbols, selected, onChange }) => {
-  return (
-    <select value={selected} onChange={onChange}>
-      {symbols.map(({ symbol, name }) => (
-        <option key={symbol} value={symbol}>
-          {symbol}
-        </option>
-      ))}
-    </select>
-  );
+  const options = symbols.map(({ symbol, name }) => ({ value: symbol, label: `${symbol} - ${name}` }));
+
+  return <Select value={selected} onChange={onChange} options={options} clearable={false} />;
 };
 
 export default SymbolPicker;

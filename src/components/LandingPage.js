@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import ConverterTitle from './ConverterTitle';
 import ConverterForm from './ConverterForm';
 import ConverterResultList from './ConverterResultList';
@@ -10,7 +11,8 @@ class LandingPage extends React.Component {
     convertFromSymbol: 'USD',
     convertToSymbol: 'EUR',
     symbols: [],
-    rates: []
+    rates: [],
+    date: moment()
   };
 
   handleConvertFromAmountChange = e => {
@@ -21,8 +23,8 @@ class LandingPage extends React.Component {
     }));
   };
 
-  handleConvertFromSymbolChange = e => {
-    const convertFromSymbol = e.target.value;
+  handleConvertFromSymbolChange = selectedOption => {
+    const convertFromSymbol = selectedOption.value;
     const rates = this.changeBaseRate(convertFromSymbol, this.state.rates);
 
     this.setState(() => ({
@@ -31,8 +33,8 @@ class LandingPage extends React.Component {
     }));
   };
 
-  handleConvertToSymbolChange = e => {
-    const convertToSymbol = e.target.value;
+  handleConvertToSymbolChange = selectedOption => {
+    const convertToSymbol = selectedOption.value;
 
     this.setState(() => ({
       convertToSymbol
@@ -53,6 +55,19 @@ class LandingPage extends React.Component {
     }));
   };
 
+  handleOnDateChange = date => {
+    this.populateRates(date).then(() => {
+      const newRates = this.changeBaseRate(this.state.convertFromSymbol, this.state.rates);
+
+      this.setState(() => ({
+        rates: newRates
+      }));
+    });
+    this.setState({
+      date
+    });
+  };
+
   populateSymbols = () => {
     return getSymbols().then(response => {
       const symbolsObject = response.symbols;
@@ -67,8 +82,10 @@ class LandingPage extends React.Component {
     });
   };
 
-  populateRates = () => {
-    return getRates().then(response => {
+  populateRates = date => {
+    const formattedDate = date.format('Y-MM-DD');
+
+    return getRates(formattedDate).then(response => {
       const ratesObject = response.rates;
       const rates = Object.keys(ratesObject).map(symbol => ({
         symbol,
@@ -83,6 +100,7 @@ class LandingPage extends React.Component {
 
   changeBaseRate = (baseSymbol, oldRates) => {
     const base = oldRates.find(({ symbol, amount }) => symbol === baseSymbol);
+    // console.log(base);
     const newRates = oldRates.map(({ symbol, amount }) => ({
       symbol,
       amount: amount / base.amount
@@ -101,9 +119,7 @@ class LandingPage extends React.Component {
 
   componentDidMount() {
     this.populateSymbols()
-      .then(() => {
-        return this.populateRates();
-      })
+      .then(() => this.populateRates(moment()))
       .then(() => {
         const newRates = this.changeBaseRate(this.state.convertFromSymbol, this.state.rates);
 
@@ -124,6 +140,7 @@ class LandingPage extends React.Component {
                 convertTo={this.getSymbolObjectFromSymbol(this.state.convertToSymbol)}
               />
               <ConverterForm
+                date={this.state.date}
                 convertFromAmount={this.state.convertFromAmount}
                 convertToAmount={this.calculateConvertToAmount()}
                 convertFromSymbol={this.state.convertFromSymbol}
@@ -132,6 +149,7 @@ class LandingPage extends React.Component {
                 handleConvertFromSymbolChange={this.handleConvertFromSymbolChange}
                 handleConvertToSymbolChange={this.handleConvertToSymbolChange}
                 handleSwitchCurrency={this.handleSwitchCurrency}
+                handleOnDateChange={this.handleOnDateChange}
                 symbols={this.state.symbols}
               />
             </div>

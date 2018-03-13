@@ -45,7 +45,7 @@ class ConverterForm extends React.Component {
             </div>
           </div>
           <button className="button" onClick={handleSwitchCurrency}>
-            <FontAwesomeIcon icon="exchange-alt" size="2x" transform={{ rotate: 90 }} />
+            <FontAwesomeIcon icon="exchange-alt" size="lg" transform={{ rotate: 90 }} />
           </button>
           <span>To</span>
           <div className="input-group">

@@ -26,24 +26,43 @@ class ConverterForm extends React.Component {
     } = this.props;
 
     return (
-      <form>
-        <div>
-          <input type="number" value={convertFromAmount} onChange={handleConvertFromAmountChange} />
-          <SymbolPicker selected={convertFromSymbol} symbols={symbols} onChange={handleConvertFromSymbolChange} />
-        </div>
-        <div>
-          <input value={convertToAmount} readOnly />
-          <SymbolPicker selected={convertToSymbol} symbols={symbols} onChange={handleConvertToSymbolChange} />
-        </div>
-        <button onClick={handleSwitchCurrency}>Reverse</button>
-        <SingleDatePicker
-          date={date}
-          onDateChange={handleOnDateChange}
-          focused={this.state.calendarFocused}
-          onFocusChange={this.onFocusChange}
-          isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
-        />
-      </form>
+      <div className="content-container">
+        <form className="form--actions">
+          <div className="input-group">
+            <div className="input-group__item">
+              <input
+                className="text-input"
+                type="number"
+                value={convertFromAmount}
+                onChange={handleConvertFromAmountChange}
+              />
+            </div>
+            <div className="input-group__item">
+              <SymbolPicker selected={convertFromSymbol} symbols={symbols} onChange={handleConvertFromSymbolChange} />
+            </div>
+          </div>
+          <button className="button" onClick={handleSwitchCurrency}>
+            Swap
+          </button>
+          <div className="input-group">
+            <div className="input-group__item">
+              <input className="text-input" value={convertToAmount} readOnly />
+            </div>
+            <div className="input-group__item">
+              <SymbolPicker selected={convertToSymbol} symbols={symbols} onChange={handleConvertToSymbolChange} />
+            </div>
+          </div>
+          <SingleDatePicker
+            date={date}
+            onDateChange={handleOnDateChange}
+            focused={this.state.calendarFocused}
+            onFocusChange={this.onFocusChange}
+            isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
+            numberOfMonths={1}
+            block={true}
+          />
+        </form>
+      </div>
     );
   }
 }

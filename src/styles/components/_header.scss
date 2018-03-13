@@ -1,18 +1,20 @@
 .header {
-  background: $dark-blue;
+  text-align: center;
+  color: $off-white;
+  background: $dark-grey;
+  padding: $l-size 0;
 }
 
-.header__content {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  padding: $s-size 0;
+.header__actions {
+  margin-top: $m-size;
 }
 
 .header__title {
-  color: white;
-  text-decoration: none;
-  h1 {
-    margin: 0;
-  }
+  font-weight: 300;
+  margin: 0;
+}
+
+.header__sub-title {
+  font-weight: 300;
+  margin: 0;
 }

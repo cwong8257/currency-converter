@@ -2,13 +2,13 @@ import React from 'react';
 
 const ConverterTitle = ({ convertFrom, convertTo }) => {
   return (
-    <div>
-      <p>
+    <div className="content-container">
+      <h1 className="header__title">
         {convertFrom.symbol} to {convertTo.symbol} Conversion
-      </p>
-      <p>
+      </h1>
+      <h2 className="header__sub-title">
         ({convertFrom.name} to {convertTo.name})
-      </p>
+      </h2>
     </div>
   );
 };

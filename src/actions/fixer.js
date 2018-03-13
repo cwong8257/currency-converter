@@ -1,4 +1,4 @@
-const key = '16fd7f1da26d65c2055a00d53407d129';
+const key = process.env.FIXER_API_KEY;
 
 export const getSymbols = () => {
   return fetch(`http://data.fixer.io/api/symbols?access_key=${key}`).then(response => {

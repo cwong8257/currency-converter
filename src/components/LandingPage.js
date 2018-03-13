@@ -135,23 +135,29 @@ class LandingPage extends React.Component {
         {this.state.symbols.length > 0 &&
           this.state.rates.length > 0 && (
             <div>
-              <ConverterTitle
-                convertFrom={this.getSymbolObjectFromSymbol(this.state.convertFromSymbol)}
-                convertTo={this.getSymbolObjectFromSymbol(this.state.convertToSymbol)}
-              />
-              <ConverterForm
-                date={this.state.date}
-                convertFromAmount={this.state.convertFromAmount}
-                convertToAmount={this.calculateConvertToAmount()}
-                convertFromSymbol={this.state.convertFromSymbol}
-                convertToSymbol={this.state.convertToSymbol}
-                handleConvertFromAmountChange={this.handleConvertFromAmountChange}
-                handleConvertFromSymbolChange={this.handleConvertFromSymbolChange}
-                handleConvertToSymbolChange={this.handleConvertToSymbolChange}
-                handleSwitchCurrency={this.handleSwitchCurrency}
-                handleOnDateChange={this.handleOnDateChange}
-                symbols={this.state.symbols}
-              />
+              <div className="header">
+                <ConverterTitle
+                  convertFrom={this.getSymbolObjectFromSymbol(this.state.convertFromSymbol)}
+                  convertTo={this.getSymbolObjectFromSymbol(this.state.convertToSymbol)}
+                  convertFromAmount={this.state.convertFromAmount}
+                  convertToAmount={this.calculateConvertToAmount()}
+                />
+              </div>
+              <div className="form">
+                <ConverterForm
+                  date={this.state.date}
+                  convertFromAmount={this.state.convertFromAmount}
+                  convertToAmount={this.calculateConvertToAmount()}
+                  convertFromSymbol={this.state.convertFromSymbol}
+                  convertToSymbol={this.state.convertToSymbol}
+                  handleConvertFromAmountChange={this.handleConvertFromAmountChange}
+                  handleConvertFromSymbolChange={this.handleConvertFromSymbolChange}
+                  handleConvertToSymbolChange={this.handleConvertToSymbolChange}
+                  handleSwitchCurrency={this.handleSwitchCurrency}
+                  handleOnDateChange={this.handleOnDateChange}
+                  symbols={this.state.symbols}
+                />
+              </div>
             </div>
           )}
         {/*<ConverterResultList selectedRate={this.state.convertToSymbol} rates={this.state.rates} />*/}

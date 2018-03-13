@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 import { SingleDatePicker, isInclusivelyBeforeDay } from 'react-dates';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { faExchangeAlt } from '@fortawesome/fontawesome-free-solid';
 import SymbolPicker from './SymbolPicker';
 
 class ConverterForm extends React.Component {
@@ -28,6 +30,7 @@ class ConverterForm extends React.Component {
     return (
       <div className="content-container">
         <form className="form--actions">
+          <span>From</span>
           <div className="input-group">
             <div className="input-group__item">
               <input
@@ -42,8 +45,9 @@ class ConverterForm extends React.Component {
             </div>
           </div>
           <button className="button" onClick={handleSwitchCurrency}>
-            Swap
+            <FontAwesomeIcon icon="exchange-alt" size="2x" transform={{ rotate: 90 }} />
           </button>
+          <span>To</span>
           <div className="input-group">
             <div className="input-group__item">
               <input className="text-input" value={convertToAmount} readOnly />
@@ -52,6 +56,7 @@ class ConverterForm extends React.Component {
               <SymbolPicker selected={convertToSymbol} symbols={symbols} onChange={handleConvertToSymbolChange} />
             </div>
           </div>
+          <span>Date</span>
           <SingleDatePicker
             date={date}
             onDateChange={handleOnDateChange}

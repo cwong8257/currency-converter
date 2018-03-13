@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import 'react-dates/initialize';
 import 'react-select/dist/react-select.css';
 import 'normalize.css/normalize.css';
